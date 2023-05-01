@@ -166,3 +166,37 @@
     }
 }
 
+.circular-text{
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+    transform: scale(1);
+    transition: .5s cubic-bezier(0.75, -127, 0.3, 2.33) transform, .5s cubic-bezier(0.75, -127, 0.3, 2.33) opacity;
+
+    .text{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        color: black;
+        font-size: 12px;
+        animation: rotate 7.5s linear infinite;
+
+        span{
+            position: absolute;
+            top: -50%;
+            transform-origin: 0 50px;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+    }
+}
+
+@keyframes rotate {
+    0%{
+        transform: rotate(360deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}

@@ -17,6 +17,8 @@ export default function Main() {
     const image = useRef(null);
     const image1 = useRef(null);
     const image2 = useRef(null);
+    const circular = useRef(null);
+    const circularText = useRef(null);
 
     useEffect(() => {
         const images =  [manga1, manga2];
@@ -45,9 +47,32 @@ export default function Main() {
             })
         }
 
+        
+
+        circularText.current.innerHTML = circularText.current.innerText.split('').map((char, idx) => {
+            console.log(circularText.current.innerText.length);
+
+            return `<span style = "transform: rotate(${idx * 10.5}deg)">${char}</span>`
+        }).join('');
+
+
     })
 
+    
+    function moveMouse (e) {
+        circular.current.style.left = `${e.pageX}px`;
+        circular.current.style.top = `${e.pageY}px`;
+    }
 
+    function enterMouse () {
+        circular.current.style.opacity = 1;
+        circular.current.style.transform = `scale(1)`;
+    }
+
+    function leaveMouse () {
+        circular.current.style.opacity = 0;
+        circular.current.style.transform = `scale(0)`
+    }
 
 
     return (
@@ -55,7 +80,7 @@ export default function Main() {
             <section className="one">
                 <div className="container">
                     <figure className="figure">
-                        <div ref={image} className="img-placeholder img-placeholder-1"></div>
+                        <div onMouseEnter={enterMouse} onMouseMove={moveMouse} onMouseLeave={leaveMouse} ref={image} className="img-placeholder img-placeholder-1"></div>
                         <p className="title">Renike</p>
 
                         <div className="label">
@@ -69,7 +94,7 @@ export default function Main() {
             <section className="two">
                 <div className="container">
                     <figure className="figure">
-                        <div ref={image1} className="img-placeholder img-placeholder-2"></div>
+                        <div onMouseEnter={enterMouse} onMouseMove={moveMouse} onMouseLeave={leaveMouse} ref={image1} className="img-placeholder img-placeholder-2"></div>
                         <p className="title">Imitor</p>
 
                         <div className="label">
@@ -83,7 +108,7 @@ export default function Main() {
             <section className="three">
                 <div className="container">
                     <figure className="figure">
-                        <div ref={image2} className="img-placeholder img-placeholder-3"></div>
+                        <div onMouseEnter={enterMouse} onMouseMove={moveMouse} onMouseLeave={leaveMouse} ref={image2} className="img-placeholder img-placeholder-3"></div>
                         <p className="title">Anthony</p>
 
                         <div className="label">
@@ -93,6 +118,12 @@ export default function Main() {
                     </figure>
                 </div>
             </section>
+
+            <div ref={circular} className="circle circular-text">
+                <div ref={circularText} className="text">
+                    Explore more content
+                </div>
+            </div>
         </body>
     )
 }
